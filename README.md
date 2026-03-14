@@ -10,5 +10,5 @@ The main data, figures and tables are prepared using the uploaded do-files.
 The maps and some data are prepared using the uploaded R-scripts.
 
 **Data
-No data is uplaoded to this repository - party due to limited rights of sharing the data. All data sources are described in the article. 
+No data is uploaded to this repository - party due to limited rights of sharing the data. All data sources are described in the article. 
 
