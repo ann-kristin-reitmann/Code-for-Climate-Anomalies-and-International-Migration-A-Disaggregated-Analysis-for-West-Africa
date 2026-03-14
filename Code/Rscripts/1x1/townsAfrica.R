@@ -20,13 +20,13 @@ library(sp)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data/")
 
-# Read cell coordinates  
+#Read cell coordinates  
 
 towns <- read.csv('./geo_data_final.csv')
 
-# Define coordinates
+#Define coordinates
 
 coordinates(towns) <- ~longitude+latitude
 
@@ -52,7 +52,7 @@ out <- over(towns, shp)
 
 towns@data <- cbind(towns@data, out)
 
-# Convert full shape file to data frame (SAVE IN R DATA FOLDER)
+#Convert full shape file to data frame (SAVE IN R DATA FOLDER)
 
 shp.town <- as(towns, "data.frame")
 
@@ -61,9 +61,9 @@ write.csv(shp.town, file = './Rdata/town_cellid.csv')
 
 #Check merge 
 
-# Read cell cordinates  
+#Read cell cordinates  
 
-# Define coordinates
+#Define coordinates
 
 coordinates(shp.town) <- ~longitude_+latitude_m
 

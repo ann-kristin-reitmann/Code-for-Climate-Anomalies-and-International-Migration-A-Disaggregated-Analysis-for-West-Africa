@@ -6,7 +6,7 @@
 #This R-Script converts the shapefile into a data frame 
 
 #----------------------------------------------------------------------------------------------------------------------
-#Read cell cordinates 
+#Read cell coordinates 
 #----------------------------------------------------------------------------------------------------------------------
 
 library(lmomco)
@@ -20,15 +20,15 @@ library(sp)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data/")
 
-# Check projection of shapefile 
+#Check projection of shapefile 
 
 shp <- readOGR('./shapefiles/Africa/raster_Africa.shp')
 
 plot(shp)
 
-# Convert full shape file to data frame 
+#Convert full shape file to data frame 
 
 shp.df <- as(shp, "data.frame")
 

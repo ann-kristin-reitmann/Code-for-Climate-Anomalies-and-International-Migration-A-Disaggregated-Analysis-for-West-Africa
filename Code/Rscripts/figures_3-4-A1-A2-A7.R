@@ -79,8 +79,3 @@ onmove <- tm_shape(shp5, xlim=c(-20, 25),  ylim=c(-10, 30)) +
               breaks = c(0, 1, 4, 10, 20, 100, 4000), labels = c("[0 to 1)", "[1 to 4)", "[4 to 10)", "[10 to 20)", "[20 to 100)", "[>100]"), interval.closure="left", palette="Greens") +
   tm_layout(legend.position = c("left", "bottom")) 
 tmap_save(onmove, "./output/figures/figure_A7.pdf")  
-
-
-
-
-

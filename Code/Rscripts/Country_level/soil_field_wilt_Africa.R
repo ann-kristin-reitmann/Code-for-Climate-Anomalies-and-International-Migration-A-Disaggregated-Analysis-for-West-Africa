@@ -20,9 +20,9 @@ library(dplyr)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data/")
 
-# Read field capacity and field wilting point 
+#Read field capacity and field wilting point 
 
 fieldcap <- raster('./_orig/NASA/fieldcapraster.gri')
 extent(fieldcap)
@@ -32,7 +32,7 @@ wiltpoint <- raster('./_orig/NASA/wiltpontraster.gri')
 extent(wiltpoint)
 crs(wiltpoint)
 
-# Check projection of shapefile 
+#Check projection of shapefile 
 
 shp5 <- readOGR('./shapefiles/Africa_Continent/ne_50m_admin_0_countries.shp')
 
@@ -68,13 +68,17 @@ outwilt <- over(shp5, wilt.df, fn=mean)
 shp5@data <- cbind(shp5@data, out)
 shp5@data <- cbind(shp5@data, outwilt)
 
-# Convert full shape file to data frame 
+#Convert full shape file to data frame 
 
 shp.field <- as(shp5, "data.frame")
 
 #setwd("./Rdata")
 
 write.csv(shp.field, file = "./Rdata/field_wilt_cells_country.csv")  
+
+#----------------------------------------------------------------------------------------------------------------------------------
+# Produce maps 
+#----------------------------------------------------------------------------------------------------------------------------------
 
 library(tmap)
 

@@ -20,9 +20,9 @@ library(dplyr)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data/")
 
-# Read field capacity and field wilting point 
+#Read field capacity and field wilting point 
 
 fieldcap <- raster('./_orig/NASA/fieldcapraster.gri')
 extent(fieldcap)
@@ -32,7 +32,7 @@ wiltpoint <- raster('./_orig/NASA/wiltpontraster.gri')
 extent(wiltpoint)
 crs(wiltpoint)
 
-# Check projection of shapefile 
+#Check projection of shapefile 
 
 shp <- readOGR('./shapefiles/Africa/raster_Africa.shp')
 
@@ -45,8 +45,8 @@ wilt.mask <- mask(wiltpoint, shp)
 
 #Convert to data frame 
 
-field.df = as.data.frame(field.mask, xy=TRUE)  # Specify the columns to extract from database
-wilt.df = as.data.frame(wilt.mask, xy=TRUE)  # Specify the columns to extract from database
+field.df = as.data.frame(field.mask, xy=TRUE)  #Specify the columns to extract from database
+wilt.df = as.data.frame(wilt.mask, xy=TRUE)  #Specify the columns to extract from database
 
 field.df = field.df[complete.cases(field.df),]
 wilt.df = wilt.df[complete.cases(wilt.df),]
@@ -68,13 +68,17 @@ outwilt <- over(shp, wilt.df, fn=mean)
 shp@data <- cbind(shp@data, out)
 shp@data <- cbind(shp@data, outwilt)
 
-# Convert full shape file to data frame 
+#Convert full shape file to data frame 
 
 shp.field <- as(shp, "data.frame")
 
 #setwd("./Rdata")
 
 write.csv(shp.field, file = "./Rdata/field_wilt_cells.csv")  
+
+#----------------------------------------------------------------------------------------------------------------------------------
+# Produce maps 
+#----------------------------------------------------------------------------------------------------------------------------------
 
 library(tmap)
 

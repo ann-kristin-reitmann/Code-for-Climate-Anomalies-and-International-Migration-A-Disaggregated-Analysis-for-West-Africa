@@ -21,11 +21,13 @@ library(sp)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data")
+
+#Read cell coordinates  
 
 crops <- read.csv('./QGIS/cell_crops_coord.csv')
 
-# Define coordinates
+#Define coordinates
 
 coordinates(crops) <- ~lon+lat
 
@@ -51,7 +53,7 @@ out <- over(shp, crops)
 
 shp@data <- cbind(shp@data, out)
 
-# Convert full shape file to data frame (SAVE IN R DATA FOLDER)
+#Convert full shape file to data frame (SAVE IN R DATA FOLDER)
 
 shp.crop <- as(shp, "data.frame")
 

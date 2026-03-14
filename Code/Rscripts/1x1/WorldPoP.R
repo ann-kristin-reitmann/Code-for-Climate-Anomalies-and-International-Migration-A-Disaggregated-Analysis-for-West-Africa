@@ -23,7 +23,7 @@ library(tmap)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data/")
 
 #Read shape file 
 
@@ -35,13 +35,13 @@ shp$pop_sum <- extract(pop, shp, fun=function(x,...) sum(x, na.rm=T))
 
 #velox(pop)$extract(sp=shp, fun=sum)
 
-# Convert full shape file to data frame 
+#Convert full shape file to data frame 
 
 shp.df <- as(shp, "data.frame")
 
 write.csv(shp.df, file = "./Rdata/pop18_cells.csv")
 
-# Maps: last month of every quarter 
+#Maps: last month of every quarter 
 
 tm_shape(shp)+ 
   tm_polygons(c("pop_sum"), style = "cont", palette="RdYlBu")

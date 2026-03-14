@@ -6,7 +6,7 @@
 #This R-Script assigns a cell for all FMP points 
 
 #----------------------------------------------------------------------------------------------------------------------
-#Read cell cordinates 
+#Read cell coordinates 
 #----------------------------------------------------------------------------------------------------------------------
 
 library(lmomco)
@@ -22,16 +22,16 @@ library(ggplot2)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data/")
 
-# Read fmp coordinates 
+#Read fmp coordinates 
 
 fmp.points <- read.csv('./fmp_geocodes.csv')
 fmp <- na.omit(fmp.points)  #Omit missing values
 
 fmp$fmp.id <- 1:nrow(fmp)
 
-# Define coordinates
+#Define coordinates
 
 coordinates(fmp) <- ~fmp_lon+fmp_lat
 
@@ -72,7 +72,8 @@ write.csv(fmp.final, file = './Rdata/fmp_cell_id.csv')
 distcent <- spDists(centroids, fmp, longlat=TRUE) 
 shp@data <- cbind(shp@data, distcent)
 
-# Convert full shape file to data frame (SAVE IN R DATA FOLDER)
+#Convert full shape file to data frame (SAVE IN R DATA FOLDER)
+
 shp.fmp <- as(shp, "data.frame")
 
 write.csv(shp.fmp, file = './Rdata/fmp_cell_distance.csv')

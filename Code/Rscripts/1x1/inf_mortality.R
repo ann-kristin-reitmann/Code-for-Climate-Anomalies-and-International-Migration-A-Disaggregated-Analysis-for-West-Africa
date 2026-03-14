@@ -22,7 +22,7 @@ library(tmap)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data/")
 
 #Read shape file 
 
@@ -41,13 +41,17 @@ shp$inf_mort <- extract(inf, shp, fun=function(x,...) mean(x, na.rm=T))
 
 shp5$inf_mort <- extract(inf, shp5, fun=function(x,...) mean(x, na.rm=T))
 
-# Convert full shape file to data frame 
+#Convert full shape file to data frame 
 
 shp.df <- as(shp, "data.frame")
 shp5.df <- as(shp5, "data.frame")
 
 write.csv(shp.df, file = "./Rdata/infmort_cells.csv")
 write.csv(shp5.df, file = "./Rdata/.5x.5/infmort_cells.csv")
+
+#----------------------------------------------------------------------------------------------------------------------------------
+# Produce maps 
+#----------------------------------------------------------------------------------------------------------------------------------
 
 library(tmap)
 

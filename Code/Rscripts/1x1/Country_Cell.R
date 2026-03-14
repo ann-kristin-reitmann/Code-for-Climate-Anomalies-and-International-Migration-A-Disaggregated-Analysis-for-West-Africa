@@ -3,7 +3,7 @@
 #Authors:	Martínez Flores, Milusheva, Reichert & Reitmann
 #Year:		2024
 
-## load packages
+##load packages
 
 library(rgdal)
 library(raster)
@@ -11,9 +11,9 @@ library(rgeos)
 
 #Change path to data folder
 
-setwd("")
+setwd(".../data/")
 
-## import data
+##import data
 
 spy_poly <- readOGR('./shapefiles/Africa_Continent/Africa.shp')
 spy_grid <- readOGR('./shapefiles/Africa/raster_Africa.shp')
@@ -38,27 +38,27 @@ write.csv(spy_grid.df, file = "./Rdata/country_cells_centroids.csv")
 spy_poly <- readOGR('./shapefiles/Africa_Continent/Africa.shp')
 spy_grid <- readOGR('./shapefiles/Africa/raster_Africa.shp')
 
-## per grid cell, identify ID covering largest area
+##per grid cell, identify ID covering largest area
 
 lst <- lapply(1:length(spy_grid), function(i) {
   
-  # create polygons subset based on current grid cell
+  #create polygons subset based on current grid cell
   
   spy_poly_crp <- crop(spy_poly, spy_grid[i, ])
   
-  # case 1: no polygon intersects with current cell
+  #case 1: no polygon intersects with current cell
   
   if (is.null(spy_poly_crp)) {
     out <- data.frame(matrix(ncol = ncol(spy_poly), nrow = 1))
     names(out) <- names(spy_poly)
     return(out)
     
-    # case 2: one polygon intersects with current cell  
+    #case 2: one polygon intersects with current cell  
     
   } else if (nrow(spy_poly_crp@data) == 1)  {
     return(spy_poly_crp@data) 
     
-    # case 3: multiple polygons intersect with current cell
+    #case 3: multiple polygons intersect with current cell
     
     # -> choose sub-polygon with largest area
   } else {
@@ -68,6 +68,6 @@ lst <- lapply(1:length(spy_grid), function(i) {
   }
 })
 
-## to 'data.frame'
+##to 'data.frame'
 
 do.call("rbind", lst)
